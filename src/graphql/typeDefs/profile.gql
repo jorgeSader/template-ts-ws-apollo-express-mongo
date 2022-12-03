@@ -1,0 +1,27 @@
+# types
+type Profile implements Node & Timestamps {
+  userAccounts: [UserAccount!]!
+  contactInfo: Contact
+  image: Image
+  bio: String
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input ProfileInput {
+  _id: ID!
+  userAccounts: [UserAccountInput!]
+  contactInfo: ContactInput
+  image: ImageInput
+  bio: String
+}
+
+# Payloads
+type ProfilePayload {
+  userErrors: [UserError!]!
+  profile: Profile
+}

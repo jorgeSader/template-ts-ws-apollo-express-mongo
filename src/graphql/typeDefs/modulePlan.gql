@@ -1,0 +1,47 @@
+# Types
+type ModulePlan implements Node & Timestamps {
+  name: String!
+  description: String!
+  freeTrialPeriod: Int!
+  setupFee: Float!
+  paymentFrequency: String!
+  basePrice: Float!
+  pricePerUser: Float!
+  sellingPoints: [String!]!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input ModulePlanInput {
+  id: ID!
+  name: String
+  description: String
+  freeTrialPeriod: Int
+  setupFee: Float
+  paymentFrequency: String
+  basePrice: Float
+  pricePerUser: Float
+  sellingPoints: [String!]
+}
+
+# Payloads
+type ModulePlanPayload {
+  userErrors: [UserError!]!
+  modulePlan: ModulePlan
+}
+
+# Cursor Based Pagination
+type ModulePlanConnection {
+  totalCount: Int!
+  edges: [ModulePlanEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ModulePlanEdge {
+  cursor: String
+  node: ModulePlanPayload
+}

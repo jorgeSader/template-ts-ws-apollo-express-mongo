@@ -1,0 +1,27 @@
+# Types
+type AppModule implements Node & Timestamps {
+  name: String!
+  description: String!
+  roles: [Role!]!
+  modulePlans: [ModulePlan!]!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input AppModuleInput {
+  _id: ID!
+  name: String
+  description: String
+  roles: [RoleInput!]
+  modulePlans: [ModulePlanInput!]
+}
+
+# Payloads
+type AppModulePayload {
+  userErrors: [UserError!]!
+  appModule: AppModule
+}

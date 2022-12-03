@@ -1,0 +1,40 @@
+# Types
+type Template implements Node & Timestamps {
+  name: String!
+  description: String!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input TemplateInput {
+  name: String!
+  description: String!
+}
+
+input TemplateUpdate {
+  id: ID!
+  name: String
+  description: String
+}
+
+# Payloads
+type TemplatePayload {
+  userErrors: [UserError!]!
+  template: Template
+}
+
+# Cursor Based Pagination
+type TemplateConnection {
+  totalCount: Int!
+  edges: [TemplateEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TemplateEdge {
+  cursor: String
+  node: TemplatePayload
+}

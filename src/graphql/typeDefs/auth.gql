@@ -1,0 +1,43 @@
+# Types
+type Role implements Node & Timestamps {
+  name: String!
+  userAccount: UserAccount!
+  pemissions: [Permission!]!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+input RoleInput {
+  _id: ID!
+  name: String
+  userAccount: UserAccountInput
+  pemissions: [PermissionInput!]
+}
+
+type Permission {
+  canCreateOwn: Boolean!
+  canCreateModule: Boolean!
+  canReadOwn: Boolean!
+  canReadModule: Boolean!
+  canUpdateOwn: Boolean!
+  canUpdateModule: Boolean!
+  canDeleteOwn: Boolean!
+  canDeleteModule: Boolean!
+}
+input PermissionInput {
+  canCreateOwn: Boolean
+  canCreateModule: Boolean
+  canReadOwn: Boolean
+  canReadModule: Boolean
+  canUpdateOwn: Boolean
+  canUpdateModule: Boolean
+  canDeleteOwn: Boolean
+  canDeleteModule: Boolean
+}
+
+type AuthPayload {
+  userErrors: [UserError]
+  token: String
+}

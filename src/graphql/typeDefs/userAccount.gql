@@ -1,0 +1,41 @@
+# Types
+type UserAccount implements Node & Timestamps {
+  name: String!
+  legalName: String!
+  legalAddress: Address!
+  appModules: [AppModule!]!
+  appModuleRoles: [Role!]!
+  users: [User!]!
+  notes: [Note!]!
+  billingInfo: String!
+  owner: User!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+type Role {
+  name: String
+  appModule: AppModule
+}
+
+# Inputs
+input UserAccountInput {
+  _id: ID!
+  name: String
+  legalName: String
+  legalAddress: AddressInput
+  appModules: [AppModuleInput!]
+  appModuleRoles: [RoleInput!]
+  users: [UserInput!]
+  notes: [NoteInput!]
+  billingInfo: String
+  owner: UserInput
+}
+
+# Payloads
+type UserAccountPayload {
+  userErrors: [UserError]!
+  userAccount: UserAccount
+}

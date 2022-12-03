@@ -1,0 +1,46 @@
+type Contact implements Node & Timestamps {
+  name: String!
+  titles: [Title!]!
+  emails: [Email!]!
+  phones: [Phone!]!
+  adressess: [Address!]!
+  keyEvents: [KeyEvent!]!
+  websites: [Website!]!
+  notes: [Note!]!
+
+  # Interface required
+  _id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input ContactInput {
+  _id: ID!
+  name: String
+  titles: [TitleInput!]
+  emails: [EmailInput!]
+  phones: [PhoneInput!]
+  adressess: [AddressInput!]
+  keyEvents: [KeyEventInput!]
+  websites: [WebsiteInput!]
+  notes: [NoteInput!]
+}
+
+# Payloads
+type ContactPayload {
+  userErrors: [UserError!]!
+  contact: Contact
+}
+
+# Cursor Based Pagination
+type ContactConnection {
+  totalCount: Int!
+  edges: [ContactEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ContactEdge {
+  cursor: String
+  node: ContactPayload
+}

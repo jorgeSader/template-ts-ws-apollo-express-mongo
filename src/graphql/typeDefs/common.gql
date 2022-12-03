@@ -1,0 +1,125 @@
+# Interface
+interface Node {
+  _id: ID!
+}
+
+interface Timestamps {
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Address
+type Address {
+  name: String!
+  address1: String!
+  address2: String
+  city: String!
+  state: String!
+  zipCode: String
+}
+input AddressInput {
+  name: String
+  address1: String
+  address2: String
+  city: String
+  state: String
+  zipCode: String
+}
+
+# Email
+type Email {
+  name: String!
+  address: String!
+  default: Boolean!
+}
+input EmailInput {
+  name: String
+  address: String!
+  default: Boolean!
+}
+
+# Image
+type Image {
+  name: String!
+  altText: String
+  path: String!
+}
+input ImageInput {
+  name: String
+  altText: String
+  path: String
+}
+
+# Key Events
+type KeyEvent {
+  name: String!
+  date: Date!
+}
+input KeyEventInput {
+  name: String
+  date: Date
+}
+
+type Note implements Timestamps {
+  message: String!
+  creator: User!
+
+  # Interface required
+  createdAt: Date!
+  updatedAt: Date!
+}
+input NoteInput {
+  message: String
+  creator: UserInput!
+}
+
+# Cursor Based Pagination
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean
+}
+
+# Phone Numbers
+type Phone {
+  name: String!
+  phone: String!
+  extension: String
+  default: Boolean!
+}
+input PhoneInput {
+  name: String
+  phone: String
+  extension: String
+  default: Boolean
+}
+
+# Job Title
+type Title {
+  title: String!
+  company: String!
+}
+input TitleInput {
+  title: String
+  company: String
+}
+
+# User Errors
+type UserError {
+  message: String!
+  code: String
+
+  # Path to input field which caused the error.
+  field: [String!]!
+}
+
+# Website
+type Website {
+  name: String!
+  address: String!
+  default: Boolean!
+}
+input WebsiteInput {
+  name: String
+  address: String
+  default: Boolean
+}

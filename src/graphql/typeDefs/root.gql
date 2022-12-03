@@ -1,0 +1,63 @@
+# Custom Scalars
+scalar Date
+
+type Query {
+  # User
+  user(userId: ID!): UserPayload!
+  users(first: Int, after: String): UserConnection!
+
+  # UserAccount
+  userAccounts: [UserAccountPayload!]!
+  userAccount(userAccountId: ID!): UserAccountPayload
+
+  # AppModules
+  appModules: [AppModulePayload!]!
+  appModule(appModulesId: ID!): AppModulePayload
+
+  # Auth
+  auths: [AuthPayload!]!
+  auth(authsId: ID!): AuthPayload
+
+  # ModulesPlans
+  modulePlans: [ModulePlanPayload!]
+  modulePlan(modulePlanId: ID!): ModulePlanPayload
+}
+
+type Mutation {
+  # Auth
+  signUp(
+    fullName: String
+    email: String
+    password: String
+    phoneNumber: String
+    accountName: String
+    legalName: String
+    legalAddress: AddressInput
+    activeAppModuleIds: [ID]
+  ): AuthPayload
+
+  signIn(email: String!, password: String!): AuthPayload
+  logOut: String
+
+  # Users
+  userCreate(email: String!, password: String!, userAccountId: ID): UserPayload!
+  userDelete(userId: ID!): UserPayload!
+  userUpdate(userId: ID!): UserPayload!
+
+  # UserAccounts
+  userAccountCreate(input: UserInput): UserAccountPayload!
+  userAccountUpdate(input: UserInput): UserAccountPayload!
+  userAccountDelete(input: UserInput): UserAccountPayload!
+  userAccountAddUser(userId: ID!): UserAccountPayload!
+  userAccountAddAppModulePlan(AppModulePlanId: ID!): UserAccountPayload!
+
+  # AppModules
+  appModuleCreate(input: AppModuleInput): AppModulePayload!
+  appModuleUpdate(input: AppModuleInput): AppModulePayload!
+  appModuleDelete(input: AppModuleInput): AppModulePayload!
+
+  # ModulePlans
+  modulePlanCreate(input: ModulePlanInput): ModulePlanPayload!
+  modulePlanUpdate(input: ModulePlanInput): ModulePlanPayload!
+  modulePlanDelete(input: ModulePlanInput): ModulePlanPayload!
+}
