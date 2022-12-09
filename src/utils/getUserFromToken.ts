@@ -1,16 +1,15 @@
-import { GraphQLError } from 'graphql';
 import JWT from 'jsonwebtoken';
 import { jwtSecret } from '../config/environment';
+import { User } from '../db/models';
 
-export const getUserFromToken = (token: string) => {
+export const getUserFromToken = async (token: string) => {
   try {
-    const jwtPayload = JWT.verify(token, jwtSecret!);
-    return jwtPayload;
+    const tokenPayload = (await JWT.verify(token, jwtSecret!)) as {
+      userId: string;
+    };
+    const userInfo = await User.findById(tokenPayload.userId);
+    return userInfo;
   } catch (err: any) {
-    throw new GraphQLError(err, {
-      extensions: {
-        code: 'UNAUTHENTICATED',
-      },
-    });
+    return null;
   }
 };

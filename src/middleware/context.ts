@@ -1,14 +1,13 @@
 import { getUserFromToken } from '../utils/getUserFromToken';
+import { PubSub } from 'graphql-subscriptions';
 
 export const context = async ({ req }: any) => {
+  const pubSub = new PubSub();
   const token = await req.headers.authorization;
-  const userInfo = token ? getUserFromToken(token) : null;
-  console.log('🚀 ~ file: context.ts:6 ~ context ~ userInfo: ', userInfo);
+  const currentUser = token ? getUserFromToken(token) : null;
 
   return {
-    userInfo,
+    currentUser,
+    pubSub,
   };
 };
-
-// const token = (await req.headers.token)?.toString() || '';
-// return token ? await getUserFromToken(token) : null;

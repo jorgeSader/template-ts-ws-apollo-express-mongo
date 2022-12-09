@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const port = process.env.PORT || 4000;
+export const gqlPath = process.env.GQL_PATH || '/graphql';
 
 // You may use this as a boolean value for different situations
 export const env = {
